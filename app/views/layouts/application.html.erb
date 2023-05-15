@@ -9,8 +9,49 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  
+  <!--header-->
+  <header>
+    <nav class="bg-warning">
+      <div class="container">
+        <div class="row">
+          
+        <div class="col-6 d-flex align-items-center">
+          <h1>
+            Nagano Cake
+          </h1>
+        </div>
+        
+        <div class="col-6">
+          <ul class="navbar list-inline-item list-unstyled">
+            <li class="nav-item btn btn-light">About</li>
+            <li class="nav-item btn btn-light">商品一覧</li>
+            <li class="nav-item btn btn-light">新規登録</li>
+            <li class="nav-item btn btn-light">ログイン</li>
+          </ul>
+        <div class="col-6 mb-2 float-right">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search">
+            <button class="btn btn-success" type="button">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+          
+        </div>
+        
+        
+      </div>
+    </nav>
+  </header>
 
   <body>
     <%= yield %>
   </body>
+  
+  <footer>
+    <div class=" w-25 bg-warning">
+      
+    </div>
+  </footer>
 </html>
