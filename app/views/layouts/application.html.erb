@@ -9,25 +9,33 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  
+
   <!--header-->
   <header>
     <nav class="bg-warning">
       <div class="container">
         <div class="row">
-          
+
         <div class="col-6 d-flex align-items-center">
           <h1>
-            Nagano Cake
+            ながのCAKE
           </h1>
         </div>
-        
+
         <div class="col-6">
           <ul class="navbar list-inline-item list-unstyled">
-            <li class="nav-item btn btn-light">About</li>
-            <li class="nav-item btn btn-light">商品一覧</li>
-            <li class="nav-item btn btn-light">新規登録</li>
-            <li class="nav-item btn btn-light">ログイン</li>
+            <li class="nav-item btn btn-light text-decoration-none">
+              <%= link_to "About", about_path %>
+            </li>
+            <li class="nav-item btn btn-light">
+              <%= link_to "商品一覧", public_items_index_path %>
+            </li>
+            <li class="nav-item btn btn-light">
+              <%= link_to "新規登録", new_customer_registration_path %>
+            </li>
+            <li class="nav-item btn btn-light">
+              <%= link_to "ログイン", new_customer_session_path %>
+            </li>
           </ul>
         <div class="col-6 mb-2 float-right">
           <div class="input-group">
@@ -37,10 +45,10 @@
             </button>
           </div>
         </div>
-          
+
         </div>
-        
-        
+
+
       </div>
     </nav>
   </header>
@@ -48,7 +56,7 @@
   <body>
     <%= yield %>
   </body>
-  
+
   <footer>
     <div class="text-warning y-5 h-75 bg-warning">
       表示なし
