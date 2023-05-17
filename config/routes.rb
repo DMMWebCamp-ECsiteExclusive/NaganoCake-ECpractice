@@ -27,24 +27,25 @@ Rails.application.routes.draw do
   end
 
 # 顧客用ルート設定
-  namespace :public do
-    get 'addresses/index'
-    get 'addresses/edit'
-  end
-  namespace :public do
-    get 'orders/new'
+  # namespace :public do
+    get '/addresses' => 'addresses#index'
+    get 'addresses/:id/edit' => 'addressed#edit'
+    resources :addresses, only: [:create, :update, :destroy]
+  # end
+  # namespace :public do
     get 'orders/thanks'
-    get 'orders/index'
-    get 'orders/show'
-  end
+    get 'orders/confirm'
+    resources :orders, only: [:new, :create, :index, :show]
+  # end
   namespace :public do
     get 'cart_items/index'
   end
-  namespace :public do
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/confirm'
-  end
+  # namespace :public do
+    get 'customers/mypage' => 'cutomers#show'
+    get 'customers/information/edit' => 'customers#edit'
+    get 'cutomers/confirm'
+    resources :customers, only: [:update, :resign]
+  # end
   namespace :public do
     get 'items/index'
     get 'items/show'

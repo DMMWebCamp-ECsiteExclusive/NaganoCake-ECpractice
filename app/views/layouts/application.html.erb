@@ -16,17 +16,19 @@
       <div class="container">
         <div class="row">
 
-        <div class="col-6 d-flex align-items-center">
+        <div class="col-5 d-flex align-items-center">
           <h1>
-            ながのCAKE
+            <%= link_to "ながのCAKE", root_path %>
           </h1>
         </div>
 
-        <div class="col-6">
+        <div class="col-7">
           <ul class="navbar list-inline-item list-unstyled">
-            
+
             <!--顧客ログイン時-->
             <% if customer_signed_in? %>
+            <div>ようこそ、<%= current_customer.last_name %>さん！</div>
+
             <li class="nav-item btn btn-light text-decoration-none">
               <%= link_to "マイページ", public_customers_edit_path %>
             </li>
@@ -39,7 +41,7 @@
             <li class="nav-item btn btn-light">
               <%= link_to "ログアウト", customer_session_path, method: :delete %>
             </li>
-         
+
             <!--管理者ログイン時-->
             <% elsif admin_signed_in? %>
             <li class="nav-item btn btn-light text-decoration-none">
