@@ -1,2 +1,82 @@
-<h1>Public::Customers#edit</h1>
-<p>Find me in app/views/public/customers/edit.html.erb</p>
+<div class="container">
+
+  <div class="row">
+    <h4 class="py-4">会員情報編集</h4>
+  </div>
+
+
+  <%= form_with model: @customer do |f| %>
+
+  <!--名前-->
+    <div class="row pb-4">
+      <div class="col-3">名前</div>
+      <label class="col-3">
+        <%= f.text_field :last_name, id="last_name" %>
+      </label>
+      <label class="col-3">
+        <%= f.text_field :first_name, id="first_name" %>
+      </label>
+      <div class="col-3"></div>
+    </div>
+
+    <div class="row pb-4">
+      <div class="col-3">フリガナ</div>
+      <label class="col-3">
+        <%= f.text_field :last_name_kana, id="last_name_kana" %>
+      </label>
+      <label class="col-3">
+        <%= f.text_field :first_name_kana, id="first_name_kana" %>
+      </label>
+      <div class="col-3"></div>
+    </div>
+    
+  <!--住所-->
+    <div class="row pb-4">
+      <div class="col-3">郵便番号</div>
+      <label class="col-3 ml-5">
+        <%= f.text_field :post_code, id="post_code" %>
+      </label>
+      <div class="col-6"></div>
+    </div>
+
+    <div class="row pb-4">
+      <div class="col-3">住所</div>
+      <label class="col-6 ml-5">
+        <%= f.text_field :address, id="address", class: 'form-control' %>
+      </label>
+      <div class="col-3"></div>
+    </div>
+
+  <!--電話番号-->
+    <div class="row pb-4">
+      <div class="col-3">電話番号</div>
+      <label class="col-3 ml-5">
+        <%= f.text_field :telephone_number, id="telephone_number" %>
+      </label>
+      <div class="col-6"></div>
+    </div>
+
+  <!--メールアドレス-->
+    <div class="row pb-4">
+      <div class="col-3">メールアドレス</div>
+      <label class="col-3 ml-5">
+        <%= f.email_field :email, id="email" %>
+      </label>
+      <div class="col-6"></div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="actions col-3 offset-3">
+        <%= f.submit "編集内容を保存", class: 'btn btn-success ml-5' %>
+      </div>
+      <div class="col-3">
+        <%= f.submit "退会する", class: 'btn btn-danger ml-5' %>
+      </div>
+    </div>
+
+  <% end %>
+
+
+</div>
