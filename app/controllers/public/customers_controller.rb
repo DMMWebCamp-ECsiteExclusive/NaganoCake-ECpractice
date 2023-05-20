@@ -15,6 +15,9 @@ class Public::CustomersController < ApplicationController
   end
   
   def resign
+    @customer = current_customer
+    @customer.patch
+    redirect_to root_path
   end
   
 end
