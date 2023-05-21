@@ -5,8 +5,7 @@ Rails.application.routes.draw do
 
 # 管理者用ルート設定
   namespace :admin do
-    get 'genres/index'
-    get 'genres/edit'
+    resources :genres, only: [:index, :create, :edit, :update]
   end
   namespace :admin do
     get 'orders/show'
@@ -23,7 +22,7 @@ Rails.application.routes.draw do
     get 'items/edit'
   end
   namespace :admin do
-    get 'homes/top'
+    get '/' => 'homes#top'
   end
 
 # 顧客用ルート設定
