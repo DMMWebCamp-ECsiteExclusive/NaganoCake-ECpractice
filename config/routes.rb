@@ -8,18 +8,16 @@ Rails.application.routes.draw do
     resources :genres, only: [:index, :create, :edit, :update]
   end
   namespace :admin do
-    get 'orders/show'
+    resources :orders, only: [:show, :update]
   end
   namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
+    resources :customers, only: [:index, :show, :edit, :update]
   end
   namespace :admin do
-    get 'items/new'
-    get 'items/index'
-    get 'items/show'
-    get 'items/edit'
+    resources :items, only: [:new, :create, :index, :show, :edit, :update]
+  end
+  namespace :admin do
+    resources :order_details, only: [:update]
   end
   namespace :admin do
     get '/' => 'homes#top'
@@ -28,27 +26,27 @@ Rails.application.routes.draw do
 # 顧客用ルート設定
   # namespace :public do
     get '/addresses' => 'addresses#index'
-    get 'addresses/:id/edit' => 'addressed#edit'
-    resources :addresses, only: [:create, :update, :destroy]
+    resources :addresses, only: [:create, :edit, :update, :destroy]
   # end
   # namespace :public do
     get 'orders/thanks'
-    get 'orders/confirm'
+    post 'orders/confirm'
     resources :orders, only: [:new, :create, :index, :show]
   # end
-  namespace :public do
-    get 'cart_items/index'
-  end
+  # namespace :public do
+    resources :cart_items, only: [:index, :update, :create, :destroy]
+    delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
+  # end
   # namespace :public do
     get 'customers/mypage' => 'cutomers#show'
     get 'customers/information/edit' => 'customers#edit'
     get 'cutomers/confirm'
-    resources :customers, only: [:update, :resign]
+    patch '/customers/resign' => 'customers#resign'
+    resources :customers, only: [:update]
   # end
-  namespace :public do
-    get 'items/index'
-    get 'items/show'
-  end
+  # namespace :public do
+    resources :items, only: [:index, :show]
+  # end
 
 # 管理者用
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
