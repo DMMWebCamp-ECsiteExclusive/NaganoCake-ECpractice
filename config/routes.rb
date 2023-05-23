@@ -29,8 +29,8 @@ Rails.application.routes.draw do
   end
   scope module: :public do
     resources :orders, only: [:new, :index, :show]
-    get 'orders/thanks' => 'public/orders#thanks'
-    post 'orders/confirm' => 'public/orders/confirm'
+    get '/orders/thanks' => 'orders#thanks'
+    post '/orders/confirm' => 'orders/confirm'
   end
   scope module: :public do
     resources :cart_items, only: [:index, :create, :update, :destroy]
@@ -38,10 +38,10 @@ Rails.application.routes.draw do
   end
   scope module: :public do
     resources :customers, only: [:update]
-    get 'customers/mypage' => 'public/cutomers#show'
-    get 'customers/information/edit' => 'public/customers#edit'
-    get 'cutomers/confirm' => 'public/customers#confirm'
-    patch '/customers/resign' => 'public/customers#resign'
+    get '/customers/mypage' => 'customers#show'
+    get '/customers/information/edit' => 'customers#edit'
+    get '/cutomers/confirm' => 'customers#confirm'
+    patch '/customers/resign' => 'customers#resign'
   end
   scope module: :public do
     resources :items, only: [:index, :show]
