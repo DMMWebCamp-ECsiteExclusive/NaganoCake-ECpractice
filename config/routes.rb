@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:update]
     get '/customers/mypage' => 'customers#show'
     get '/customers/information/edit' => 'customers#edit'
-    get '/cutomers/confirm' => 'customers#confirm'
+    get '/customers/confirm' => 'customers#confirm'
     patch '/customers/resign' => 'customers#resign'
   end
   scope module: :public do
