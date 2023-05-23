@@ -24,29 +24,28 @@ Rails.application.routes.draw do
   end
 
 # 顧客用ルート設定
-  # namespace :public do
-    get '/addresses' => 'addresses#index'
-    resources :addresses, only: [:create, :edit, :update, :destroy]
-  # end
-  # namespace :public do
-    get 'orders/thanks'
-    post 'orders/confirm'
-    resources :orders, only: [:new, :create, :index, :show]
-  # end
-  # namespace :public do
-    resources :cart_items, only: [:index, :update, :create, :destroy]
+  scope module: :public do
+    resources :addresses, only: [:index, :edit, :create, :update, :destory]
+  end
+  scope module: :public do
+    resources :orders, only: [:new, :index, :show]
+    get 'orders/thanks' => 'public/orders#thanks'
+    post 'orders/confirm' => 'public/orders/confirm'
+  end
+  scope module: :public do
+    resources :cart_items, only: [:index, :create, :update, :destroy]
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
-  # end
-  # namespace :public do
-    get 'customers/mypage' => 'cutomers#show'
-    get 'customers/information/edit' => 'customers#edit'
-    get 'cutomers/confirm'
-    patch '/customers/resign' => 'customers#resign'
+  end
+  scope module: :public do
     resources :customers, only: [:update]
-  # end
-  # namespace :public do
+    get 'customers/mypage' => 'public/cutomers#show'
+    get 'customers/information/edit' => 'public/customers#edit'
+    get 'cutomers/confirm' => 'public/customers#confirm'
+    patch '/customers/resign' => 'public/customers#resign'
+  end
+  scope module: :public do
     resources :items, only: [:index, :show]
-  # end
+  end
 
 # 管理者用
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
