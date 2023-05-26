@@ -1,7 +1,13 @@
 class Public::ItemsController < ApplicationController
   
   def index
-    @item = Item.page(params[:page])
+    
+    if params[:item_name].exists?
+      @items = Item.page(params[:item_name, :page])
+    else
+      @items = Item.page(params[:page])
+    end
+    
   end
 
   def show
