@@ -1,18 +1,22 @@
 class Public::ItemsController < ApplicationController
-  
+
   def index
-    # @genre = Genre.find(params[:genre_name])
+    @genre = params[:genre_name]
     
-    if params[:item_name].exists?
-      @items = Item.page(params[:item_name, :page])
+    if params[:item_name].present?
+      @item = Item.find(params[:item_name])
+      @items = Item.find(params[:item_name][:page])
+      
+    elsif params[:genre_name].present?
+      @genres = params[:genre_name]
+    
     else
       @items = Item.page(params[:page])
     end
-    
+
   end
 
   def show
-    # @genre = Genre.find(params[:genre_name])
     @customer = current_customer
     @item = Item.find(params[:id])
   end
