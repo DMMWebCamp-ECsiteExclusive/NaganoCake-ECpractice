@@ -27,7 +27,7 @@
             <!--顧客ログイン時-->
           <% if customer_signed_in? %>
           <ul class="navbar list-inline-item list-unstyled">
-            
+
             <div>ようこそ、<%= current_customer.last_name %>さん！</div>
 
             <li class="nav-item btn btn-light text-decoration-none">
@@ -43,17 +43,15 @@
               <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
             </li>
           </ul>
-          
+
           <div class="col-6 mb-2 float-right">
             <%= form_with url:items_path, method: :get do |f| %>
-            
+
               <%= f.text_field :name, placeholder: "Seach" %>
-              <%= f.submit url:items_path do %>
-                <button class="btn btn-light" type="button">
+              <%= f.button :type => "submit", class: "btn btn-light" do %>
                   <i class="fas fa-search"></i>
-                </button>
               <% end %>
-              
+
             <% end %>
           </div>
         <!--<div class="col-6 mb-2 float-right">-->
@@ -64,11 +62,11 @@
         <!--    </button>-->
         <!--  </div>-->
         <!--</div>-->
-        
+
             <!--管理者ログイン時-->
           <% elsif admin_signed_in? %>
           <ul class="navbar list-inline-item list-unstyled">
-            
+
             <li class="nav-item btn btn-light text-decoration-none">
               <%= link_to "商品一覧", admin_items_path %>
             </li>
@@ -94,11 +92,11 @@
             </button>
           </div>
         </div>
-        
+
             <!--一般閲覧画面時-->
           <% else %>
           <ul class="navbar list-inline-item list-unstyled">
-            
+
             <li class="nav-item btn btn-light text-decoration-none">
               <%= link_to "About", about_path %>
             </li>

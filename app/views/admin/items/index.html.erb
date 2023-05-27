@@ -7,10 +7,10 @@
       <%= link_to "+", new_admin_item_path, class: 'btn btn-light, rounded-circle p-0' %>
     </div>
   </div>
-  
+
   <div class="row">
     <table>
-      
+
       <thead>
         <th>商品ID</th>
         <th>商品名</th>
@@ -19,21 +19,22 @@
         <th></th>
         <th>ステータス</th>
       </thead>
-      
-      <tbody>
         <% @items.each do |item| %>
-        
+
+      <tbody>
+
         <td><%= item.id %></td>
-        <td><%= link_to item.name, url:admin_item_path(item) %></td>
+        <td><%= link_to item.name, admin_item_path(item.id) %></td>
         <td><%= item.price %></td>
-        <td><%= item.genre_id %></td>
+        <td><%= item.genre.name %></td>
         <td></td>
-        <td><%= item.status %></td>
-        
-        <% end %>
-      </tbody>
+        <td><%= item.is_sale %></td>
+
+      </tbody> 
+      <% end %>
+
     </table>
-    
-    <%= pagenate items %>
+
+    <%= paginate @items %>
   </div>
 </div>
