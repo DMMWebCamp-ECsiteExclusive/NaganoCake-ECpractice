@@ -5,15 +5,23 @@
     </div>
     
     <div class="col-8 offset-1">
-      <%= image_tag @item.get_item_image(200, 200) %>
+      <div>
+        <%= image_tag @item.get_item_image(200, 200) %>
+      </div>
+      <div>
+        <%= @item.name %>
+      </div>
+      <div>
+        <%= @item.introduction %>
+      </div>
+      <div>
+        <%= @item.price*1.1 %>(税込)
+      </div>
+      <div>個数選択</div>
       
-      <%= @item.name %>
-      <%= @item.introduction %>
-      <%= @item.price*1.1 %>(税込)
-      
-      個数選択
-      
-      <%= link_to "カートに入れる", cart_items_path(@customer), class: 'btn btn-success %>
+      <div>
+      <%= link_to "カートに入れる", cart_items_path(@customer), class: 'btn btn-success' %>
+      </div>
     </div>
   </div>
 </div>

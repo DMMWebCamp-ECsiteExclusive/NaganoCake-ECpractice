@@ -2,16 +2,16 @@ class Public::ItemsController < ApplicationController
 
   def index
 
-    if params[:item_name].present?
-      @item = Item.find(params[:item_name])
-      @items = Item.find(params[:item_name][:page])
+    # if params[:item_name].present?
+    #   @item = Item.find(params[:item_name])
+    #   @items = Item.find(params[:item_name][:page])
 
-    elsif params[:genre_name].present?
-      @genres = params[:genre_name]
+    # elsif params[:genre_name].present?
+    #   @genres = params[:genre_name]
 
-    else
+    # else
       @items = Item.page(params[:page])
-    end
+    # end
 
   end
 
