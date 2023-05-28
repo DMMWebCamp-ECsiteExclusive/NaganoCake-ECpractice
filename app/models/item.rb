@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
   
+
   belongs_to :genre
   has_many :item_details, dependent: :destroy
   has_many :cart_items, dependent: :destroy
@@ -15,4 +16,5 @@ class Item < ApplicationRecord
     end
     item_image.variant(resize_to_limit: [width, height]).processed
   end
+
 end
