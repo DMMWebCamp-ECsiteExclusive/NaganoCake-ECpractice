@@ -1,2 +1,27 @@
-<h1>Public::Items#show</h1>
-<p>Find me in app/views/public/items/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <%= render 'public/left_contents' %>
+    </div>
+    
+    <div class="col-8 offset-1">
+      <div>
+        <%= image_tag @item.get_item_image(200, 200) %>
+      </div>
+      <div>
+        <%= @item.name %>
+      </div>
+      <div>
+        <%= @item.introduction %>
+      </div>
+      <div>
+        <%= @item.price*1.1 %>(税込)
+      </div>
+      <div>個数選択</div>
+      
+      <div>
+      <%= link_to "カートに入れる", cart_items_path(@customer), class: 'btn btn-success' %>
+      </div>
+    </div>
+  </div>
+</div>
