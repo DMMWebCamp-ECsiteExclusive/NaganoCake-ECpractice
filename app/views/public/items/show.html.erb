@@ -10,21 +10,22 @@
       </div>
     </div>
     <div class="col-7 p-5">
-      <%= form_with url:cart_items_path, method: :post do |f| %>
+      <%= form_with model: @cart_item, url:cart_items_path, method: :post do |f| %>
 
-      <h3 class="mb-2"><%= @item.name %></h3>
-      <h5 class="p-2"><%= @item.introduction %></h5>
-      <div class="pl-2">
-        <%= @item.price*1.1 %>(税込)
-      </div>
-      <div class="pl-2">
-        <%= f.hidden.field @cart_item, :value => :item.id %>
-        <%= f.select :amount, *[1..5] %>
-      </div>
+        <h3 class="mb-2"><%= @item.name %></h3>
+        <h5 class="p-2"><%= @item.introduction %></h5>
+        <div class="pl-2">
+          <%= @price.ceil %>(税込)
+        </div>
+        <div class="p-2">
+          <%= f.hidden_field :item_id, :value => @item.id %>
+          <%= f.label :amount, "個数選択" %>
+          <%= f.select :amount, *[1..5] %>
+        </div>
 
-      <div>
-      <%= f.submit "カートに入れる", cart_items_path(@customer), class: 'btn btn-success' %>
-      </div>
+        <div>
+          <%= f.submit "カートに入れる", class: 'btn btn-success' %>
+        </div>
 
       <% end %>
     </div>
