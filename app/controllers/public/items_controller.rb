@@ -19,7 +19,7 @@ class Public::ItemsController < ApplicationController
     @customer = current_customer
     @item = Item.find(params[:id])
     @price = @item.price*1.1
-    @cart_item = CartItem
+    @cart_item = CartItem.new
   end
 
 

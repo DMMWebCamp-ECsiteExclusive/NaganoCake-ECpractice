@@ -1,8 +1,8 @@
 class Public::CartItemsController < ApplicationController
 
   def index
-    @cart_items = CartItem.all
-    @item = Item.find(params[:id])
+    @cart_items = CartItem.all(cart_item_params[:item_id])
+    @item = CartItem.find(cart_item_params[:item_id])
     @cart_item = CartItem
     @price = @item.price*1.1
   end
@@ -15,7 +15,7 @@ class Public::CartItemsController < ApplicationController
   end
 
   def update
-    cart_item = CartItem.find(parmas[:id])
+    cart_item = CartItem.find(cart_item_parmas[:item_id])
     cart_item.update(cart_item_params)
     redirect_to cart_items_path
   end
@@ -30,6 +30,6 @@ class Public::CartItemsController < ApplicationController
   private
 
   def cart_item_params
-    params.require(:cart_item).permit(:item_id, :customer_id, :amount)
+    params.require(:cart_item).permit(:item_id, :amount)
   end
 end
