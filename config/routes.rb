@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
 # 顧客用ルート設定
   scope module: :public do
-    resources :addresses, only: [:index, :edit, :create, :update, :destory]
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
   scope module: :public do
     resources :orders, only: [:new, :index, :show]
