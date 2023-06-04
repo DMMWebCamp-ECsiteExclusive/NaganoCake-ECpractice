@@ -33,8 +33,8 @@ Rails.application.routes.draw do
     post '/orders/confirm' => 'orders/confirm'
   end
   scope module: :public do
-    resources :cart_items, only: [:index, :create, :update, :destroy]
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'
+    resources :cart_items, only: [:index, :create, :update, :destroy]
   end
   scope module: :public do
     patch '/customers/resign' => 'customers#resign'
