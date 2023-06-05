@@ -22,6 +22,13 @@ class Public::AddressesController < ApplicationController
     address.update(address_params)
     redirect_to addresses_path(current_customer)
   end
+  
+  def destroy
+    address = Address.find(params[:id])
+    address.customer_id = current_customer.id
+    address.destroy
+    redirect_to addresses_path(current_customer)
+  end
 
 
   private
