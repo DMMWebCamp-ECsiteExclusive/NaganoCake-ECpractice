@@ -8,4 +8,8 @@ class Order < ApplicationRecord
   
   enum status: { waiting_payment: 0, deposited: 1, production: 2, preparing: 3, shipped: 4 }
   
+  # def address_id
+    
+  # end
+  
 end
