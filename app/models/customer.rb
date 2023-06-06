@@ -9,4 +9,9 @@ class Customer < ApplicationRecord
   has_many :addresses, dependent: :destroy
   
   
+  # def customer_address
+  #   '〒' + post_code + ' ' + address + ' ' + last_name + first_name
+  # end
+  
+  
 end
