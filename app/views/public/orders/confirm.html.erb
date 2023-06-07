@@ -2,12 +2,12 @@
   <div class="row">
     <h4 class="p-4">注文情報確認</h4>
   </div>
-  
+
   <%= form_with model: @order, url:orders_path, method: :post do |f| %>
-  
+
   <!--カート情報-->
   <div class="row">
-    
+
     <div class="col-5">
       <table class="table table-border">
         <thead>
@@ -28,7 +28,7 @@
         </tbody>
       </table>
     </div>
-    
+
     <div class="col-2">
       <table class="table table-border">
           <tr>
@@ -46,36 +46,37 @@
       </table>
     </div>
   </div>
-  
+
   <!--支払い方法-->
   <div class="row">
     <div class="col-2 offset-1">
       <h5>支払方法</h5>
     </div>
     <div class="col-9">
+      <%= @order.payment_method_i18n %>
     </div>
   </div>
-  
+
   <!--お届け先-->
   <div class="row">
     <div class="col-2 offset-1">
       <h5>お届け先</h5>
     </div>
     <div class="col-9">
-      〒 <%= @order.post_code %>
-         <%= @order.address %>
-         <%= @order_name %>
+      〒 <%= @order.delivery_post_code %>
+         <%= @order.delivery_address %>
+         <%= @order.delivery_name %>
     </div>
   </div>
-  
+
   <!--送信ボタン-->
   <div class="row">
     <div class="col-2 offset-5">
       <%= f.submit "注文を確定する", class: 'btn btn-success' %>
     </div>
     <div class="col-5"></div>
-  </div>  
-  
+  </div>
+
   <% end %>
-    
+
 </div>

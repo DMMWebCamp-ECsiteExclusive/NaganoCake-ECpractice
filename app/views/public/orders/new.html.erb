@@ -29,8 +29,8 @@
         <h5>お届け先</h5>
         <!--自分の住所-->
         <div class="pl-3">
-          <%= f.radio_button :address_id, 0 %>
-          <%= f.label :address_id, "ご自身の住所" %>
+          <%= f.radio_button :address_option, 0 %>
+          <%= f.label :address_option, "ご自身の住所" %>
           <div class="pl-5 pb-2">
           〒<%= @customer.post_code %>
             <%= @customer.address %>
@@ -40,18 +40,18 @@
 
         <!--登録先住所-->
         <div class="pl-3">
-          <%= f.radio_button :address_id, 1 %>
-          <%= f.label :address_id, "登録済み住所から選択" %>
+          <%= f.radio_button :address_option, 1 %>
+          <%= f.label :address_option, "登録済み住所から選択" %>
           <div class="ml-5 mb-3">
-          <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>
+          <%= f.select :select_option, options_from_collection_for_select(Address.all, :id, :address_display) %>
           </div>
         </div>
 
         <!--新規登録住所-->
         <div class="pl-3">
           <!--%= f.hidden_field :address_id, :value => @address.id %>-->
-          <%= f.radio_button :address_id, 2 %>
-          <%= f.label :address_id, "新しいお届け先" %>
+          <%= f.radio_button :address_option, 2 %>
+          <%= f.label :address_option, "新しいお届け先" %>
 
           <div class="pl-5">
             郵便番号(ハイフンなし)
