@@ -37,11 +37,12 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @order_detail = OrderDetail.new(order_detail_params)
     @cart_items = current_customer.cart_items.all
 
     if @order.customer_id = current_customer.id
       @order.save
-      @cart_items.save(order_detail_params)
+      @cart_items.save
       @cart_items.destroy_all
       redirect_to orders_thanks_path
     else
@@ -70,6 +71,6 @@ class Public::OrdersController < ApplicationController
   end
 
   def order_detail_params
-    pramas.require(:order_detail).permit(:order_id, :item_id, :amount, :order_price)
+    params.require(:order_detail).permit(:order_id, :item_id, :amount, :order_price)
   end
 end
