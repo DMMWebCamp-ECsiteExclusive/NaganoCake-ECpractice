@@ -10,7 +10,8 @@ class Public::OrdersController < ApplicationController
     @payment_method = Order.payment_methods
     @cart_items = current_customer.cart_items.all
     @total_price = @cart_items.inject(0) { |sum, cart_item| sum + cart_item.subtotal }
-    @total_payment = @total_price + 800
+    @postage = 800
+    @total_payment = @total_price + @postage
 
     if params[:order][:address_option] == "0"
 
@@ -35,6 +36,17 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
+    @order = Order.new(order_params)
+    @cart_items = current_customer.cart_items.all
+
+    if @order.customer_id = current_customer.id
+      @order.save
+      @cart_items.save(order_detail_params)
+      @cart_items.destroy_all
+      redirect_to orders_thanks_path
+    else
+      redirect_to root_path
+    end
   end
 
   def thanks
@@ -44,12 +56,20 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
+    if params[:id] == "confirm"
+      redirect_to new_order_path
+    end
+
   end
 
 
   private
 
   def order_params
-    params.require(:order).permit(:payment_method, :delivery_post_code, :delivery_address, :delivery_name)
+    params.require(:order).permit(:payment_method, :delivery_post_code, :delivery_address, :delivery_name, :total_payment, :postage)
+  end
+
+  def order_detail_params
+    pramas.require(:order_detail).permit(:order_id, :item_id, :amount, :order_price)
   end
 end
