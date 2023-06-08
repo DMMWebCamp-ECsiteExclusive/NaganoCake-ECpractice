@@ -8,6 +8,9 @@ class Public::OrdersController < ApplicationController
   def confirm
     @order = Order.new(order_params)
     @payment_method = Order.payment_methods
+    @cart_items = current_customer.cart_items.all
+    @total_price = @cart_items.inject(0) { |sum, cart_item| sum + cart_item.subtotal }
+    @total_payment = @total_price + 800
 
     if params[:order][:address_option] == "0"
 
@@ -21,10 +24,12 @@ class Public::OrdersController < ApplicationController
       @order.delivery_address = @address.address
       @order.delivery_name = @address.name
 
-    else params[:order][:address_option] == "2"
-      @order.delivery_post_code = Order.find(params[:order][:new_post_code])
-      @order.delivery_address = Order.find(params[:order][:new_address])
-      @order.delivery_name = Order.find(params[:order][:new_name])
+    elsif params[:order][:address_option] == "2"
+      @order.delivery_post_code = @order.delivery_post_code
+      @order.delivery_address = @order.delivery_address
+      @order.delivery_name = @order.delivery_name
+    else
+      redirect_to cart_items_path
 
     end
   end
@@ -45,6 +50,6 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:payment_method, :post_code, :address, :name)
+    params.require(:order).permit(:payment_method, :delivery_post_code, :delivery_address, :delivery_name)
   end
 end
