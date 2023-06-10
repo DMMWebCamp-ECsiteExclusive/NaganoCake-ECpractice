@@ -26,9 +26,12 @@ class Public::OrdersController < ApplicationController
       @order.delivery_name = @address.name
 
     elsif params[:order][:address_option] == "2"
-      @order.delivery_post_code = @order.delivery_post_code
-      @order.delivery_address = @order.delivery_address
-      @order.delivery_name = @order.delivery_name
+      address = Address.new(address_params[:address])
+      address.post_code = @order.delivery_post_code
+      address.address = @order.delivery_address
+      address.name = @order.delivery_name
+      @order_id = current_customer.id
+      address.save
     else
       redirect_to cart_items_path
 
@@ -37,16 +40,31 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @order_detail = OrderDetail.new(order_detail_params)
-    @cart_items = current_customer.cart_items.all
+    @order.customer_id = current_customer.id
+    cart_items = current_customer.cart_items.all
 
-    if @order.customer_id = current_customer.id
-      @order.save
-      @cart_items.save
-      @cart_items.destroy_all
+    if @order.save
+      cart_items.each do |cart_item|
+        order_detail = OrderDetail.new
+        order_detail.item_id = cart_item.item_id
+        order_detail.order_id = @order.id
+        order_detail.amount = cart_item.amount
+        order_detail.order_price = cart_item.item.price * 1.1
+        order_detail.save
+      end
+
+      # if params[:order][:address_option] == "2"
+      #   address = Address.new(address_params[:address])
+      #   address.post_code = delivery_post_code
+      #   address.address = delivery_address
+      #   address.name = delivery_name
+      #   address.save
+      # end
       redirect_to orders_thanks_path
+      cart_items.destroy_all
     else
-      redirect_to root_path
+      @order = Order.new(order_params)
+      render :new
     end
   end
 
@@ -54,6 +72,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
+    @orders = Order.all
   end
 
   def show
@@ -70,7 +89,8 @@ class Public::OrdersController < ApplicationController
     params.require(:order).permit(:payment_method, :delivery_post_code, :delivery_address, :delivery_name, :total_payment, :postage)
   end
 
-  def order_detail_params
-    params.require(:order_detail).permit(:order_id, :item_id, :amount, :order_price)
+  def address_params
+    params.require(:order).permit(address:[:post_code, :address, :name])
   end
+
 end
