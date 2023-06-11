@@ -26,12 +26,15 @@ class Public::OrdersController < ApplicationController
       @order.delivery_name = @address.name
 
     elsif params[:order][:address_option] == "2"
-      address = Address.new(address_params[:address])
+      # なぜこれではいったかわからん
+      address = current_customer.addresses.new(address_params)
       address.post_code = @order.delivery_post_code
       address.address = @order.delivery_address
       address.name = @order.delivery_name
-      @order_id = current_customer.id
-      address.save
+      if address.save
+      else
+        render :new
+      end
     else
       redirect_to cart_items_path
 
@@ -90,7 +93,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def address_params
-    params.require(:order).permit(address:[:post_code, :address, :name])
+    params.require(:order).permit(:post_code, :address, :name)
   end
 
 end
