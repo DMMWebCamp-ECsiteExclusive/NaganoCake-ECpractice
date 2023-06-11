@@ -76,13 +76,17 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = Order.all
+
   end
 
   def show
     if params[:id] == "confirm"
       redirect_to new_order_path
     end
-
+    
+    @order = Order.find(params[:id])
+    @order_items = @order.items.all
+    # @total_price = @order_items.inject(0) { |sum, order_item| sum + (item.with_tax_price * amount) }
   end
 
 

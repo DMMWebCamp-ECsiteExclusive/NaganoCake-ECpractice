@@ -2,11 +2,11 @@
   <div class="row">
     <h4 class="p-4">注文履歴一覧</h4>
   </div>
-  
+
   <div class="row">
     <div class="col-10 offset-1">
       <table class="table border-top border-bottom">
-        
+
         <thead>
           <tr>
             <th class="p-2">購入日時</th>
@@ -15,30 +15,30 @@
             <th class="p-2">注文ステータス</th>
           </tr>
         </thead>
-        
+
         <tbody>
           <% @orders.each do |order| %>
-          
+
           <tr>
             <td class="p-2">
-              
+              <%= link_to order.created_at.strftime('%Y/%m/%d %H:%M'), admin_order_path(order) %>
             </td>
             <td class="p-2">
-              <%= order.customer_id.last_name %>
+              <%= order.customer.last_name + order.customer.first_name %>
             </td>
             <td class="p-2">
-              <%= order.amount %>
+              <!--%= order.order_details.@amounts %>-->
             </td>
             <td class="p-2">
-              <%= order.status %>
+              <%= order.status_i18n %>
             </td>
           </tr>
-          
+
           <% end %>
         </tbody>
-        
+
       </table>
-      
+
       <%= paginate @orders %>
     </div>
     <div class="col-1"></div>
