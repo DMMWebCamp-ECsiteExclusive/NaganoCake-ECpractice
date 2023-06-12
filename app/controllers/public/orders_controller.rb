@@ -85,8 +85,7 @@ class Public::OrdersController < ApplicationController
     end
     
     @order = Order.find(params[:id])
-    @order_items = @order.items.all
-    # @total_price = @order_items.inject(0) { |sum, order_item| sum + (item.with_tax_price * amount) }
+    @order_details = @order.order_details
   end
 
 

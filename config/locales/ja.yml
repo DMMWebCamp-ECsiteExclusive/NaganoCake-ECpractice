@@ -11,3 +11,10 @@ ja:
         production: "製作中"
         preparing: "発送準備中"
         shipped: "発送済み"
+
+    order_detail:
+      crafting_status:
+        cannot_start: "着手不可"
+        waiting_craft: "製作待ち"
+        running: "製作中"
+        finish: "製作完了"

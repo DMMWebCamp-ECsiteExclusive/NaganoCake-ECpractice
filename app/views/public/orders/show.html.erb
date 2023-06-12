@@ -37,7 +37,7 @@
         <thead>
           <tr>
             <th>商品合計</th>
-            <td></td>
+            <td><%= @order.total_payment - @order.postage %></td>
           </tr>
           <tr>
             <th>送料</th>
@@ -66,13 +66,13 @@
           </tr>
         </thead>
 
-        <% @order_items.each do |order_item| %>
+        <% @order_details.each do |order_detail| %>
         <tbody>
           <tr>
-            <td><%= order_item.name %></td>
-            <td><%= order_item.with_tax_price %></td>
-            <!--<td>%= order_item.order.order_details.amount %></td>-->
-            <td></td>
+            <td><%= order_detail.item.name %></td>
+            <td><%= order_detail.order_price %></td>
+            <td><%= order_detail.amount %></td>
+            <td><%= order_detail.subtotal %></td>
           </tr>
         </tbody>
         <% end %>
