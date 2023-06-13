@@ -3,16 +3,15 @@ class Public::ItemsController < ApplicationController
 
   def index
 
-    # if params[:item_name].present?
-    #   @item = Item.find(params[:item_name])
-    #   @items = Item.find(params[:item_name][:page])
+    if params[:item_name].present?
+      @items = Item.where(name: params[:item_name])
 
-    # elsif params[:genre_name].present?
-    #   @genres = params[:genre_name]
+    elsif params[:genre_name].present?
+      @genres = params[:genre_name]
 
-    # else
+    else
       @items = Item.page(params[:page])
-    # end
+    end
 
   end
 
@@ -20,7 +19,6 @@ class Public::ItemsController < ApplicationController
     @cart_item = CartItem.new
     @customer = current_customer
     @item = Item.find(params[:id])
-    @price = (@item.price*1.1).ceil
   end
 
 

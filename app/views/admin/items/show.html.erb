@@ -19,7 +19,7 @@
       </div>
       <div>
         税込価格(税抜価格)
-        <%= @item.price*1.1 %>
+        <%= @item.with_tax_price %>
         (<%= @item.price %>)
       </div>
       <div>
