@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
 
   def new
     @order = Order.new
@@ -32,8 +33,9 @@ class Public::OrdersController < ApplicationController
       address.address = @order.delivery_address
       address.name = @order.delivery_name
       if address.save
+        redirect_to orders_confirm_path(current_customer)
       else
-        render :new
+        redirect_to new_order_path(current_customer)
       end
     else
       redirect_to cart_items_path
@@ -55,14 +57,6 @@ class Public::OrdersController < ApplicationController
         order_detail.order_price = cart_item.item.price * 1.1
         order_detail.save
       end
-
-      # if params[:order][:address_option] == "2"
-      #   address = Address.new(address_params[:address])
-      #   address.post_code = delivery_post_code
-      #   address.address = delivery_address
-      #   address.name = delivery_name
-      #   address.save
-      # end
       redirect_to orders_thanks_path
       cart_items.destroy_all
     else

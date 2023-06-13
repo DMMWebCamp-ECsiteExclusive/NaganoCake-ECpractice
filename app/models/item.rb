@@ -6,7 +6,11 @@ class Item < ApplicationRecord
   has_many :cart_items, dependent: :destroy
 
   has_one_attached :item_image
-
+  
+  validates :item_image, presence: true
+  validates :name, presence: true
+  validates :introduction, presence: true
+  validates :price, numericality: true, presence: true
 
 
   def get_item_image(width, height)
