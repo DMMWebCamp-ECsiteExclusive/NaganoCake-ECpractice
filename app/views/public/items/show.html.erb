@@ -20,10 +20,13 @@
           <%= f.label :amount, "個数選択" %>
           <%= f.select :amount, *[1..5] %>
         </div>
-
+       <% if @item.is_sale == true %>
         <div>
           <%= f.submit "カートに入れる", class: 'btn btn-success' %>
         </div>
+       <% else %>
+          <div></div>
+       <% end %>
 
       <% end %>
     </div>
