@@ -108,9 +108,9 @@
             </ul>
   
             <div class="col-6 mb-2 float-right">
-              <%= form_with url:items_path, method: :get do |f| %>
+              <%= form_with url:items_path, method: :get, local: true do |f| %>
   
-                <%= f.text_field :item_name, placeholder: "Seach" %>
+                <%= f.text_field :seach, placeholder: "Seach" %>
                 <%= f.button :type => "submit", class: "btn btn-light" do %>
                     <i class="fas fa-search"></i>
                 <% end %>
