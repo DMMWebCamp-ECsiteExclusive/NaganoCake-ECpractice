@@ -3,7 +3,7 @@ class Public::HomesController < ApplicationController
 
   def top
     @items = Item.order('id DESC').limit(4)
-    # @item = Item.find(params[:id])
+    @genres = Genre.all
   end
 
   def about

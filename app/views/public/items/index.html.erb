@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-2 pt-4">
-      <%= render 'public/left_contents' %>
+      <%= render 'public/left_contents', genres: @genres %>
     </div>
 
     <div class="col-10 pt-4">
 
-      <% if params[:genre_name].present? %>
+      <% if params[:name].present? %>
         <h4><%= @genre.name %>一覧<span>（全<%= @genre.items.count %>件）</span></h4>
            <% @genre.items.each do |genre_item| %>
              <div>
@@ -18,7 +18,6 @@
              </div>
 
            <% end %>
-        <!--%= paginate @items %>-->
 
       <% else %>
         <h4>商品一覧<span>（全<%= @items.count %>件）</span></h4>
@@ -26,7 +25,7 @@
           <% @items.each do |item| %>
 
             <%= link_to item_path(item) do %>
-              <%= image_tag item.get_item_image(150, 200) %>
+              <%= image_tag item.get_item_image(150, 150) %>
             <% end %>
             <%= item.name %>
             ￥<%= item.price %>

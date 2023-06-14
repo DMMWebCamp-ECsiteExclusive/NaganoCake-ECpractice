@@ -14,9 +14,6 @@ class Admin::OrdersController < ApplicationController
       @order_details.update_all(crafting_status: 1) if @order.status == "deposited"
       redirect_to admin_order_path(@order)
       
-    # elsif @order.status != "deposited"
-    #   redirect_to admin_order_path(@order)
-      
     else
       redirect_to admin_path
     end

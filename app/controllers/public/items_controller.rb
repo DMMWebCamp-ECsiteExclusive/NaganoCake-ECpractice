@@ -2,12 +2,11 @@ class Public::ItemsController < ApplicationController
   before_action :authenticate_customer!, except: [:index, :show]
 
   def index
+    @genres = Genre.all
+    @genre = Genre.find(params[:name])
 
     if params[:seach].present?
       @items = Item.where('name LIKE ?', "%#{params[:seach]}%")
-
-    elsif params[:genre_name].present?
-      @genre = Genre.find(params[:genre_name])
 
     else
       @items = Item.page(params[:page])
