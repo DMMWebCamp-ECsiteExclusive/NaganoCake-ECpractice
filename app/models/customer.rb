@@ -19,7 +19,7 @@ class Customer < ApplicationRecord
   validates :post_code, numericality: true, presence: true
   validates :address, presence: true
   validates :telephone_number, numericality: true, presence: true
-  validates :is_deleted, presence: true, inclusion: { in: [false, true] }
+  # validates :is_deleted, presence: true, inclusion: { in: [false, true] }
 
 
 end

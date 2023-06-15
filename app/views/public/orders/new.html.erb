@@ -43,13 +43,12 @@
           <%= f.radio_button :address_option, 1 %>
           <%= f.label :address_option, "登録済み住所から選択" %>
           <div class="ml-5 mb-3">
-          <%= f.select :select_option, options_from_collection_for_select(Address.all, :id, :address_display) %>
+          <%= f.select :select_option, options_from_collection_for_select(@customer.addresses.all, :id, :address_display) %>
           </div>
         </div>
 
         <!--新規登録住所-->
         <div class="pl-3">
-          <!--%= f.hidden_field :address_id, :value => @address.id %>-->
           <%= f.radio_button :address_option, 2 %>
           <%= f.label :address_option, "新しいお届け先" %>
 

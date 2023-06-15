@@ -3,10 +3,12 @@ class Public::ItemsController < ApplicationController
 
   def index
     @genres = Genre.all
-    @genre = Genre.find(params[:name])
 
     if params[:seach].present?
       @items = Item.where('name LIKE ?', "%#{params[:seach]}%")
+    
+    elsif params[:name].present?
+      @genre = Genre.find(params[:name])
 
     else
       @items = Item.page(params[:page])
@@ -18,6 +20,7 @@ class Public::ItemsController < ApplicationController
     @cart_item = CartItem.new
     @customer = current_customer
     @item = Item.find(params[:id])
+    @genres = Genre.all
   end
 
 

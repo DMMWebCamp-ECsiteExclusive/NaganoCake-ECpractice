@@ -32,11 +32,11 @@ class Public::OrdersController < ApplicationController
       address.post_code = @order.delivery_post_code
       address.address = @order.delivery_address
       address.name = @order.delivery_name
-      if address.save
-        redirect_to orders_confirm_path(current_customer)
-      else
-        redirect_to new_order_path(current_customer)
+
+      if !address.save
+        redirect_to new_order_path
       end
+
     else
       redirect_to cart_items_path
 
@@ -69,15 +69,15 @@ class Public::OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.all
-
+    @customer = current_customer
+    @orders = @customer.orders.all
   end
 
   def show
     if params[:id] == "confirm"
       redirect_to new_order_path
     end
-    
+
     @order = Order.find(params[:id])
     @order_details = @order.order_details
   end
