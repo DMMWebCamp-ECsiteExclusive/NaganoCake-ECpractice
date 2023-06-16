@@ -18,10 +18,10 @@ class Admin::OrderDetailsController < ApplicationController
       end
 
       @order.update(status: 3) if is_updated
-      redirect_to admin_order_path(@order_detail)
+      redirect_to admin_order_path(@order)
 
     elsif @order_detail.crafting_status != "running"
-      redirect_to admin_order_path(@order_detail)
+      redirect_to admin_order_path(@order)
 
     else
       redirect_to admin_path
