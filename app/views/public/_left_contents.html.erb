@@ -2,17 +2,10 @@
   <h5 class="border-bottom p-2 text-center">ジャンル検索</h5>
 
   <ul class="list-unstyled px-2">
+    <% genres.each do |genre| %>
     <li class="p-2">
-      ケーキ
+      <%= link_to genre.name, items_path(name: genre.id) %>
     </li>
-    <li class="p-2">
-      焼き菓子
-    </li>
-    <li class="p-2">
-      プリン
-    </li>
-    <li class="p-2">
-      キャンディ
-    </li>
+    <% end %>
   </ul>
 </div>

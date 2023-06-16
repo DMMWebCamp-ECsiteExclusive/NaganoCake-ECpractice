@@ -1,17 +1,18 @@
 class Public::ItemsController < ApplicationController
+  before_action :authenticate_customer!, except: [:index, :show]
 
   def index
+    @genres = Genre.all
 
-    # if params[:item_name].present?
-    #   @item = Item.find(params[:item_name])
-    #   @items = Item.find(params[:item_name][:page])
+    if params[:seach].present?
+      @items = Item.where('name LIKE ?', "%#{params[:seach]}%")
+    
+    elsif params[:name].present?
+      @genre = Genre.find(params[:name])
 
-    # elsif params[:genre_name].present?
-    #   @genres = params[:genre_name]
-
-    # else
+    else
       @items = Item.page(params[:page])
-    # end
+    end
 
   end
 
@@ -19,7 +20,7 @@ class Public::ItemsController < ApplicationController
     @cart_item = CartItem.new
     @customer = current_customer
     @item = Item.find(params[:id])
-    @price = (@item.price*1.1).ceil
+    @genres = Genre.all
   end
 
 

@@ -19,12 +19,12 @@
       </div>
       <div>
         税込価格(税抜価格)
-        <%= @item.price*1.1 %>
+        <%= @item.with_tax_price %>
         (<%= @item.price %>)
       </div>
       <div>
         販売ステータス
-        <%= @item.is_sale %>
+        <%= @item.is_sale ? '販売中' : '販売停止中' %>
       </div>
     </div>
     <div class="row my-4">

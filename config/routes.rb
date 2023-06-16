@@ -28,9 +28,9 @@ Rails.application.routes.draw do
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
   scope module: :public do
-    resources :orders, only: [:new, :index, :show]
     get '/orders/thanks' => 'orders#thanks'
-    post '/orders/confirm' => 'orders/confirm'
+    post '/orders/confirm' => 'orders#confirm'
+    resources :orders, only: [:new, :index, :show, :create]
   end
   scope module: :public do
     delete 'cart_items/destroy_all' => 'cart_items#destroy_all'

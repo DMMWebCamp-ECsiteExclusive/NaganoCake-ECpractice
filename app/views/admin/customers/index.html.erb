@@ -20,7 +20,7 @@
         <td><%= customer.id %></td>
         <td><%= link_to customer.last_name + customer.first_name, admin_customer_path(customer) %></td>
         <td><%= customer.email %></td>
-        <td><%= customer.is_deleted %></td>
+        <td><%= customer.is_deleted ? '無効' : '有効' %></td>
       </tr>
     </tbody>
     <% end %>

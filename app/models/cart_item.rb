@@ -1,4 +1,5 @@
 class CartItem < ApplicationRecord
+  # before_commit :authenticate_customer!
   
   belongs_to :customer
   belongs_to :item
