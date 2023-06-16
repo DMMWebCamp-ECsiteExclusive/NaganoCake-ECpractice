@@ -1,34 +1,43 @@
 <div class="container">
   <div class="row">
-    <div class="col-2 pt-3">
+
+  <!--left-->
+    <div class="col-2 pt-4">
       <%= render 'public/left_contents', genres: @genres %>
     </div>
 
-    <div class="col-3 p-4">
+  <!--right-->
+    <div class="col-3 pt-5">
       <div>
-        <%= image_tag @item.get_item_image(200, 200) %>
+        <%= image_tag @item.get_item_image(300, 300) %>
       </div>
     </div>
+
     <div class="col-7 p-5">
       <%= form_with model: @cart_item, url:cart_items_path, method: :post do |f| %>
 
-        <h3 class="mb-2"><%= @item.name %></h3>
-        <h5 class="p-2"><%= @item.introduction %></h5>
-        <div class="pl-2"><%= @item.with_tax_price %>(税込)</div>
-        <div class="p-2">
+        <div class="mb-2 h3"><%= @item.name %></div>
+        <div class="p-4 h5"><%= @item.introduction %></div>
+        <div class="p-3 h3">
+          ￥<%= @item.with_tax_price %>
+          <span class="h6">(税込)</span>
+        </div>
+        <div class="pl-4 h5">
           <%= f.hidden_field :item_id, :value => @item.id %>
           <%= f.label :amount, "個数選択" %>
           <%= f.select :amount, *[1..5] %>
-        </div>
-       <% if @item.is_sale == true %>
-        <div>
-          <%= f.submit "カートに入れる", class: 'btn btn-success' %>
-        </div>
-       <% else %>
-          <div></div>
-       <% end %>
+
+          <% if @item.is_sale == true %>
+            <span class="ml-5">
+              <%= f.submit "カートに入れる", class: 'btn btn-md btn-success' %>
+            </span>
+           </div>
+          <% else %>
+           <div></div>
+          <% end %>
 
       <% end %>
     </div>
+
   </div>
 </div>

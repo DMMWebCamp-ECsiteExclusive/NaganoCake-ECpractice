@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h4 class="p-4">注文情報確認</h4>
+    <h4 class="pt-4 pl-5 ml-5">注文情報確認</h4>
   </div>
 
   <%= form_with model: @order, url:orders_path, method: :post do |f| %>
@@ -9,7 +9,7 @@
   <div class="row">
 
     <div class="col-8">
-      <table class="table table-border border-bottom">
+      <table class="table table-light table-striped">
         <thead>
           <tr>
             <th>商品名</th>
@@ -19,7 +19,7 @@
           </tr>
         </thead>
 
-        <tbody>
+        <tbody class="h6">
           <% @cart_items.each do |cart_item| %>
           <tr>
             <td>
@@ -36,8 +36,8 @@
       </table>
     </div>
 
-    <div class="col-3">
-      <table class="table table-border">
+    <div class="col-3 h6">
+      <table class="table table-light table-striped">
         <tr>
           <th>送料</th>
           <td>
@@ -62,11 +62,11 @@
   </div>
 
   <!--支払い方法-->
-  <div class="row">
-    <div class="col-2 offset-1">
-      <h5>支払方法</h5>
+  <div class="row mb-3">
+    <div class="col-2">
+      <div class="h5">支払方法</div>
     </div>
-    <div class="col-9">
+    <div class="col-10">
       <%= f.hidden_field :payment_method, value: @order.payment_method %>
       <%= @order.payment_method_i18n %>
     </div>
@@ -74,10 +74,10 @@
 
   <!--お届け先-->
   <div class="row">
-    <div class="col-2 offset-1">
-      <h5>お届け先</h5>
+    <div class="col-2">
+      <div class="h5">お届け先</div>
     </div>
-    <div class="col-9">
+    <div class="col-10">
       <div>
           <%= f.hidden_field :delivery_post_code, value: @order.delivery_post_code %>
         〒<%= @order.delivery_post_code %>
