@@ -11,14 +11,22 @@
 
   <div class="row pt-3">
     <div class="col-9 offset-1">
-    <table class="table table-bordered table-striped table-light">
+    <table class="table">
       <thead>
         <tr class="text-center">
-          <th>商品名</th>
-          <th>単価(税込)</th>
-          <th>数量</th>
-          <th>小計</th>
-          <th></th>
+          <th class="table-secondary border border-dark">
+            商品名
+          </th>
+          <th class="table-secondary border border-dark">
+            単価(税込)
+          </th>
+          <th class="table-secondary border border-dark">
+            数量
+          </th>
+          <th class="table-secondary border border-dark">
+            小計
+          </th>
+          <th class="table-secondary border border-dark"></th>
         </tr>
       </thead>
 
@@ -26,33 +34,37 @@
       <tbody class="h6">
         <% @cart_items.each do |cart_item| %>
         <tr>
-          <td>
+          <td class="table-light border border-dark">
             <%= image_tag cart_item.item.get_item_image(50, 50) %>
             <%= cart_item.item.name %>
           </td>
-          <td class="align-middle">
+          <td class="table-light border border-dark align-middle">
             <%= cart_item.item.with_tax_price %>
           </td>
-          <td>
+          <td class="table-light border border-dark text-center">
             <%= form_with model: cart_item, url: cart_item_path(cart_item), method: :patch do |f| %>
               <%= f.select :amount, *[1..5] %>
               <%= f.submit "変更", class: 'btn btn-success' %>
             <% end %>
           </td>
-          <td class="align-middle"><%= cart_item.subtotal %></td>
-          <td>
+          <td class="table-light border border-dark align-middle"><%= cart_item.subtotal %></td>
+          <td class="table-light border border-dark text-center">
             <%= link_to "削除する", cart_item_path(cart_item), method: :delete, class: 'btn btn-danger' %>
           </td>
         </tr>
         <% end %>
         <tr>
-          <td>
+          <td class="border border-0">
             <%= link_to "買い物を続ける", items_path, class: 'btn btn-primary' %>
           </td>
           <td></td>
           <td></td>
-          <td>合計金額</td>
-          <td><%= @total_price %></td>
+          <td class="border table-light border-dark align-middle">
+            合計金額
+          </td>
+          <td class="border table-light border-dark align-middle">
+            <%= @total_price %>
+          </td>
         </tr>
       </tbody>
 

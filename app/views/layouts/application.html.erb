@@ -17,21 +17,20 @@
       <div class="container">
 
         <div class="row">
-
           <div class="col-3 d-flex align-items-center">
-            <h1 class="">
+            <h1 class="pt-4">
               <%= link_to "ながのCAKE", root_path, class: 'text-white text-decoration-none' %>
             </h1>
           </div>
 
-          <div class="col-9 mt-3">
+       <!--顧客ログイン時-->
+          <% if customer_signed_in? %>
+            <div class="col-2 offset-2 mt-5">
+              <div class="text-white">ようこそ、<%= current_customer.last_name %>さん！</div>
+            </div>
 
-              <!--顧客ログイン時-->
-            <% if customer_signed_in? %>
+            <div class="col-5 mt-3">
               <ul class="navbar list-inline-item list-unstyled">
-
-                <div class="text-white">ようこそ、<%= current_customer.last_name %>さん！</div>
-
                 <li class="nav-item btn btn-light">
                   <%= link_to "マイページ", customers_mypage_path, class: 'text-dark text-decoration-none' %>
                 </li>
@@ -46,56 +45,64 @@
                 </li>
 
               </ul>
+            </div>
+          </div>
 
-              <div class="col-4 mb-2 float-right">
-                <%= form_with url:items_path(current_customer), method: :get do |f| %>
 
-                  <%= f.text_field :seach, placeholder: "Seach"%>
-                  <%= f.button :type => "submit", class: "btn btn-sm btn-light" do %>
-                      <i class="fas fa-search"></i>
-                  <% end %>
+          <div class="row float-right">
+            <div class="col-12 mb-2 mr-3">
+              <%= form_with url:items_path(current_customer), method: :get do |f| %>
 
+                <%= f.text_field :seach, placeholder: "Seach"%>
+                <%= f.button :type => "submit", class: "btn btn-sm btn-light" do %>
+                    <i class="fas fa-search"></i>
                 <% end %>
-              </div>
 
-              <!--管理者ログイン時-->
-            <% elsif admin_signed_in? %>
-              <div class="col-9 float-right">
-                <ul class="navbar list-inline-item list-unstyled">
+              <% end %>
+            </div>
+          </div>
 
-                  <li class="nav-item btn btn-light text-decoration-none">
-                    <%= link_to "商品一覧", admin_items_path, class: 'text-dark text-decoration-none mx-1' %>
-                  </li>
-                  <li class="nav-item btn btn-light">
-                    <%= link_to "会員一覧", admin_customers_path, class: 'text-dark text-decoration-none mx-1' %>
-                  </li>
-                  <li class="nav-item btn btn-light">
-                    <%= link_to "注文履歴一覧", admin_path, class: 'text-dark text-decoration-none' %>
-                  </li>
+       <!--管理者ログイン時-->
+          <% elsif admin_signed_in? %>
+            <div class="col-7 offset-2 float-right mt-3">
+              <ul class="navbar list-inline-item list-unstyled">
 
-                  <li class="nav-item btn btn-light">
-                    <%= link_to "ジャンル一覧", admin_genres_path, class: 'text-dark text-decoration-none' %>
-                  </li>
-                  <li class="nav-item btn btn-light">
-                    <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'text-dark text-decoration-none'  %>
-                  </li>
-                </ul>
-              </div>
+                <li class="nav-item btn btn-light text-decoration-none">
+                  <%= link_to "商品一覧", admin_items_path, class: 'text-dark text-decoration-none mx-1' %>
+                </li>
+                <li class="nav-item btn btn-light">
+                  <%= link_to "会員一覧", admin_customers_path, class: 'text-dark text-decoration-none mx-1' %>
+                </li>
+                <li class="nav-item btn btn-light">
+                  <%= link_to "注文履歴一覧", admin_path, class: 'text-dark text-decoration-none' %>
+                </li>
 
-              <div class="col-4 mb-2 float-right">
-                <%= form_with url:admin_items_path, method: :get do |f| %>
+                <li class="nav-item btn btn-light">
+                  <%= link_to "ジャンル一覧", admin_genres_path, class: 'text-dark text-decoration-none' %>
+                </li>
+                <li class="nav-item btn btn-light">
+                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'text-dark text-decoration-none'  %>
+                </li>
+              </ul>
+            </div>
+          </div>
 
-                  <%= f.text_field :seach, placeholder: "Seach" %>
-                  <%= f.button :type => "submit", class: "btn btn-light" do %>
-                      <i class="fas fa-search"></i>
-                  <% end %>
+          <div class="row float-right">
+            <div class="col-12 mb-2 mr-3">
+              <%= form_with url:admin_items_path, method: :get do |f| %>
 
+                <%= f.text_field :seach, placeholder: "Seach" %>
+                <%= f.button :type => "submit", class: "btn btn-light" do %>
+                    <i class="fas fa-search"></i>
                 <% end %>
-              </div>
 
-              <!--一般閲覧画面時-->
-            <% else %>
-              <div class="col-7 offset-2 float-right">
+              <% end %>
+            </div>
+          </div>
+
+       <!--一般閲覧画面時-->
+          <% else %>
+            <div class="col-5 offset-4 float-right mt-3">
               <ul class="navbar list-inline-item list-unstyled">
 
                 <li class="nav-item btn btn-light text-decoration-none">
@@ -111,22 +118,24 @@
                   <%= link_to "ログイン", new_customer_session_path, class: 'text-dark text-decoration-none'%>
                 </li>
               </ul>
-
-              </div>
-              <div class="col-4 mb-2 float-right">
-                <%= form_with url:items_path, method: :get, local: true do |f| %>
-
-                  <%= f.text_field :seach, placeholder: "Seach" %>
-                  <%= f.button :type => "submit", class: "btn btn-sm btn-light" do %>
-                      <i class="fas fa-search"></i>
-                  <% end %>
-
-                <% end %>
-              </div>
-            <% end %>
+            </div>
           </div>
 
-      </div>
+          <div class="row float-right">
+            <div class="col-12 mb-2 mr-3">
+              <%= form_with url:items_path, method: :get, local: true do |f| %>
+
+                <%= f.text_field :seach, placeholder: "Seach" %>
+                <%= f.button :type => "submit", class: "btn btn-sm btn-light" do %>
+                    <i class="fas fa-search"></i>
+                <% end %>
+
+              <% end %>
+            </div>
+          </div>
+
+          <% end %>
+
       </div>
     </nav>
   </header>
