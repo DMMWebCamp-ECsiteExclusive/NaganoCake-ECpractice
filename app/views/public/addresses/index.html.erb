@@ -15,7 +15,7 @@
     <div class="row py-1">
       <div class="col-3">住所</div>
       <div class="col-5">
-        <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", class: 'form-control' %>
+        <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", class: 'form-control border-dark' %>
       </div>
       <div class="col-4"></div>
     </div>
@@ -35,13 +35,19 @@
   <div class="row pt-5">
 
     <div class="col-8">
-    <table class="table table-bordered">
+    <table class="table">
       <thead>
         <tr>
-          <th class="py-1">郵便番号</th>
-          <th class="py-1">住所</th>
-          <th class="py-1">宛名</th>
-          <th class="py-1"></th>
+          <th class="table-secondary border border-dark text-center">
+            郵便番号
+          </th>
+          <th class="table-secondary border border-dark text-center">
+            住所
+          </th>
+          <th class="table-secondary border border-dark text-center">
+            宛名
+          </th>
+          <th class="table-secondary border border-dark"></th>
         </tr>
       </thead>
 
@@ -49,16 +55,16 @@
 
         <% @addresses.each do |address| %>
         <tr>
-          <td class="py-1">
+          <td class="table-light border border-dark align-middle">
             <%= address.post_code %>
           </td>
-          <td class="py-1">
+          <td class="table-light border border-dark align-middle">
             <%= address.address %>
           </td>
-          <td class="py-1">
+          <td class="table-light border border-dark align-middle">
             <%= address.name %>
           </td>
-          <td class="py-1">
+          <td class="table-light border border-dark align-middle text-center">
             <%= link_to "編集する", edit_address_path(address), class: 'btn btn-success' %>
             <%= link_to "削除する", address_path(address), method: :delete, class: 'btn btn-danger' %>
           </td>
