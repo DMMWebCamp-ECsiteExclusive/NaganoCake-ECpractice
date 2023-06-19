@@ -4,79 +4,133 @@
   </div>
 
   <div class="row">
+
+  <!--注文情報-->
     <div class="col-6">
       <div class="p-2">注文情報</div>
-      <table class="table table-bordered">
+      <table class="table">
         <thead>
           <tr>
-            <th>注文日</th>
-            <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+            <th class="table-secondary border border-dark align-middle">
+              注文日
+            </th>
+            <td class="table-light border border-dark align-middle">
+              <%= @order.created_at.strftime('%Y/%m/%d') %>
+            </td>
           </tr>
+
           <tr>
-            <th>配送先</th>
-            <td>
+            <th class="table-secondary border border-dark align-middle">
+              配送先
+            </th>
+            <td class="table-light border border-dark align-middle">
               <div><%= @order.delivery_post_code %></div>
               <div><%= @order.delivery_address %></div>
               <div><%= @order.delivery_name %></div>
             </td>
           </tr>
+
           <tr>
-            <th>支払い方法</th>
-            <td><%= @order.payment_method_i18n %></td>
+            <th class="table-secondary border border-dark align-middle">
+              支払い方法
+            </th>
+            <td class="table-light border border-dark align-middle">
+              <%= @order.payment_method_i18n %>
+            </td>
           </tr>
+
           <tr>
-            <th>ステータス</th>
-            <td><%= @order.status_i18n %></td>
+            <th class="table-secondary border border-dark align-middle">
+              ステータス
+            </th>
+            <td class="table-light border border-dark align-middle">
+              <%= @order.status_i18n %>
+            </td>
           </tr>
+
         </thead>
       </table>
     </div>
+
+  <!--請求情報-->
     <div class="col-3">
       <div class="p-2">請求情報</div>
-      <table class="table table-bordered">
+      <table class="table">
         <thead>
           <tr>
-            <th>商品合計</th>
-            <td><%= @order.total_payment - @order.postage %></td>
+            <th class="table-secondary border border-dark align-middle">
+              商品合計
+            </th>
+            <td class="table-light border border-dark align-middle">
+              <%= @order.total_payment - @order.postage %>
+            </td>
           </tr>
+
           <tr>
-            <th>送料</th>
-            <td><%= @order.postage %></td>
+            <th class="table-secondary border border-dark align-middle">
+              送料
+            </th>
+            <td class="table-light border border-dark align-middle">
+              <%= @order.postage %>
+            </td>
           </tr>
-            <th>ご請求額</th>
-            <td><%= @order.total_payment %></td>
+
+            <th class="table-secondary border border-dark align-middle">
+              ご請求額
+            </th>
+            <td class="table-light border border-dark align-middle">
+              <%= @order.total_payment %>
+            </td>
           </tr>
+
         </thead>
       </table>
     </div>
     <div class="col-3"></div>
-
   </div>
 
+<!--注文内容（商品）一覧-->
   <div class="row">
     <div class="col-8">
       <div class="p-2">注文内容</div>
-      <table class="table table-bordered">
-        <thead>
+      <table class="table">
+        <thead class="text-center">
           <tr>
-            <th>商品名</th>
-            <th>単価(税込)</th>
-            <th>個数</th>
-            <th>小計</th>
+            <th class="table-secondary border border-dark align-middle">
+              商品名
+            </th>
+            <th class="table-secondary border border-dark align-middle">
+              単価(税込)
+            </th>
+            <th class="table-secondary border border-dark align-middle">
+              個数
+            </th>
+            <th class="table-secondary border border-dark align-middle">
+              小計
+            </th>
           </tr>
         </thead>
 
-        <% @order_details.each do |order_detail| %>
         <tbody>
-          <tr>
-            <td><%= order_detail.item.name %></td>
-            <td><%= order_detail.order_price %></td>
-            <td><%= order_detail.amount %></td>
-            <td><%= order_detail.subtotal %></td>
-          </tr>
+          <% @order_details.each do |order_detail| %>
+            <tr>
+              <td class="table-light border border-dark align-middle">
+                <%= order_detail.item.name %>
+              </td>
+              <td class="table-light border border-dark align-middle">
+                <%= order_detail.order_price %>
+              </td>
+              <td class="table-light border border-dark align-middle">
+                <%= order_detail.amount %>
+              </td>
+              <td class="table-light border border-dark align-middle">
+                <%= order_detail.subtotal %>
+              </td>
+            </tr>
+          <% end %>
         </tbody>
-        <% end %>
       </table>
+
     </div>
     <div class="col-4"></div>
   </div>

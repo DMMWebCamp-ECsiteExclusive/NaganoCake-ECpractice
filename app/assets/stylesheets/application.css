@@ -13,3 +13,22 @@
  *= require_tree .
  *= require_self
  */
+
+ .container {
+   height: 130px;
+ }
+
+ body {
+   background-image: url('cake_background.jpg');
+   background-size: cover;
+   background-position: top center;
+ }
+
+ .cover {
+   background-color:  rgba(225, 225, 225, 0.5);
+   height: 700px;
+ }
+
+ .footer {
+   height: 100px;
+ }

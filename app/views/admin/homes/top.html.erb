@@ -5,14 +5,14 @@
 
   <div class="row">
     <div class="col-10 offset-1">
-      <table class="table border-top border-bottom">
+      <table class="table">
 
         <thead>
           <tr>
-            <th class="p-2">購入日時</th>
-            <th class="p-2">購入者</th>
-            <th class="p-2">注文個数</th>
-            <th class="p-2">注文ステータス</th>
+            <th class="table-secondary border border-dark text-center">購入日時</th>
+            <th class="table-secondary border border-dark text-center">購入者</th>
+            <th class="table-secondary border border-dark text-center">注文個数</th>
+            <th class="table-secondary border border-dark text-center">注文ステータス</th>
           </tr>
         </thead>
 
@@ -20,16 +20,16 @@
           <% @orders.each do |order| %>
 
           <tr>
-            <td class="p-2">
+            <td class="table-light border border-dark">
               <%= link_to order.created_at.strftime('%Y/%m/%d %H:%M'), admin_order_path(order) %>
             </td>
-            <td class="p-2">
+            <td class="table-light border border-dark">
               <%= order.customer.last_name + order.customer.first_name %>
             </td>
-            <td class="p-2">
-              <!--%= order.order_details.@amounts %>-->
+            <td class="table-light border border-dark align-middle text-center">
+              <%= order.order_details.sum(:amount) %>
             </td>
-            <td class="p-2">
+            <td class="table-light border border-dark">
               <%= order.status_i18n %>
             </td>
           </tr>
@@ -38,9 +38,14 @@
         </tbody>
 
       </table>
-
-      <%= paginate @orders %>
     </div>
     <div class="col-1"></div>
+  </div>
+  
+  <div class="row">
+    <div class="col-2 offset-5">
+      <div><%= paginate @orders %></div>
+    </div>
+    <div class="col-5"></div>
   </div>
 </div>

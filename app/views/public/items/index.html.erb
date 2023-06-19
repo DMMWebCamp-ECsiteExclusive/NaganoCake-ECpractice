@@ -1,42 +1,49 @@
 <div class="container">
   <div class="row">
-    <div class="col-2 pt-4">
+    <div class="col-2 pt-5">
       <%= render 'public/left_contents', genres: @genres %>
     </div>
 
-    <div class="col-10 pt-4">
-
-      <% if params[:name].present? %>
+  <!--ジャンル検索-->
+    <% if params[:name].present? %>
+      <div class="col-9 mt-5">
         <h4><%= @genre.name %>一覧<span>（全<%= @genre.items.count %>件）</span></h4>
-           <% @genre.items.each do |genre_item| %>
-             <div>
-               <%= link_to item_path(genre_item) do %>
-                 <%= image_tag genre_item.get_item_image(150, 150) %>
-               <% end %>
-               <div><%= genre_item.name %></div>
-               <div><%= genre_item.price %></div>
-             </div>
 
-           <% end %>
+        <div class="p-4 bg-white d-flex flex-row flex-wrap">
+         <% @genre.items.each do |genre_item| %>
+           <div class="ml-5">
+             <%= link_to item_path(genre_item) do %>
+               <%= image_tag genre_item.get_item_image(200, 200) %>
+             <% end %>
+             <div><%= genre_item.name %></div>
+             <div><%= genre_item.price %></div>
+           </div>
+         <% end %>
+        </div>
+      </div>
+      <div class="col-1"></div>
+    </div>
 
-      <% else %>
-        <h4>商品一覧<span>（全<%= @items.count %>件）</span></h4>
-        <div class="pr-1">
+  <!--商品検索/通常-->
+    <% else %>
+      <div class="col-9 mt-5">
+        <h4 class="pb-4">商品一覧<span>（全<%= @items.count %>件）</span></h4>
+
+        <div class="p-3 my-2 bg-white d-flex flex-row flex-wrap">
           <% @items.each do |item| %>
-
+          <div class="ml-5">
             <%= link_to item_path(item) do %>
-              <%= image_tag item.get_item_image(150, 150) %>
+              <%= image_tag item.get_item_image(200, 200) %>
             <% end %>
-            <%= item.name %>
-            ￥<%= item.price %>
-
+            <div><%= item.name %></div>
+            <div>￥<%= item.price %></div>
+          </div>
           <% end %>
         </div>
+      </div>
+      <div class="col-1"></div>
 
-        <!--%= paginate @items %>-->
+    <% end %>
 
-      <% end %>
-
-    </div>
   </div>
 </div>

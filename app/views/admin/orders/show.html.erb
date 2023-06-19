@@ -7,28 +7,28 @@
     <div class="col-7">
       <table class="table">
         <tr>
-          <th>購入者</th>
-          <td><%= @order.customer.last_name + @order.customer.first_name %></td>
+          <th class="table-secondary border border-dark">購入者</th>
+          <td class="table-light border border-dark"><%= @order.customer.last_name + @order.customer.first_name %></td>
         </tr>
         <tr>
-          <th>注文日</th>
-          <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+          <th class="table-secondary border border-dark">注文日</th>
+          <td class="table-light border border-dark"><%= @order.created_at.strftime('%Y/%m/%d') %></td>
         </tr>
         <tr>
-          <th>配送先</th>
-          <td>
+          <th class="table-secondary border border-dark">配送先</th>
+          <td class="table-light border border-dark">
             <div>〒<%= @order.delivery_post_code %> <%= @order.delivery_address %></div>
             <div><%= @order.delivery_name %></div>
           </td>
         </tr>
         <tr>
-          <th>支払方法</th>
-          <td><%= @order.payment_method_i18n %></td>
+          <th class="table-secondary border border-dark">支払方法</th>
+          <td class="table-light border border-dark"><%= @order.payment_method_i18n %></td>
         </tr>
         <tr>
           <%= form_with model: @order, url:admin_order_path(@order), method: :patch do |f| %>
-            <th>注文ステータス</th>
-            <td>
+            <th class="table-secondary border border-dark">注文ステータス</th>
+            <td class="table-light border border-dark">
               <%= f.select :status, Order.statuses_i18n.invert %>
               <%= f.submit '更新', class: 'btn btn-success' %>
             </td>
@@ -42,24 +42,42 @@
 
   <div class="row">
     <div class="col-8">
-      <table class="table table-bordered">
+      <table class="table">
         <thead>
           <tr>
-            <th>商品名</th>
-            <th>単価(税込)</th>
-            <th>数量</th>
-            <th>小計</th>
-            <th>製作ステータス</th>
+            <th class="table-secondary border-bottom border-secondary">
+              商品名
+            </th>
+            <th class="table-secondary border-bottom border-secondary">
+              単価(税込)
+            </th>
+            <th class="table-secondary border-bottom border-secondary">
+              数量
+            </th>
+            <th class="table-secondary border-bottom border-secondary">
+              小計
+            </th>
+            <th class="table-secondary border-bottom border-secondary">
+              製作ステータス
+            </th>
           </tr>
         </thead>
         <tbody>
           <% @order_details.each do |order_detail| %>
             <tr>
-              <td><%= order_detail.item.name %></td>
-              <td><%= order_detail.order_price %></td>
-              <td><%= order_detail.amount %></td>
-              <td><%= order_detail.subtotal %></td>
-              <td>
+              <td class="table-light border-bottom border-secondary align-middle">
+              <%= order_detail.item.name %>
+              </td>
+              <td class="table-light border-bottom border-secondary align-middle">
+                <%= order_detail.order_price %>
+              </td>
+              <td class="table-light border-bottom border-secondary align-middle">
+                <%= order_detail.amount %>
+              </td>
+              <td class="table-light border-bottom border-secondary align-middle">
+                <%= order_detail.subtotal %>
+              </td>
+              <td class="table-light border-bottom border-secondary">
                 <%= form_with model: order_detail, url:admin_order_detail_path(order_detail), method: :patch do |f| %>
                   <%= f.hidden_field :order_id, :value => order_detail.order_id %>
                   <%= f.select :crafting_status, OrderDetail.crafting_statuses_i18n.invert %>
@@ -71,19 +89,31 @@
         </tbody>
       </table>
     </div>
-    <div class="col-4">
+    <div class="col-3 offset-1">
       <table class="table">
         <tr>
-          <th>商品合計</th>
-          <td><%= @order.total_payment - @order.postage %></td>
+          <th class="table-secondary border border-dark">
+            商品合計
+          </th>
+          <td class="table-light border border-dark">
+            <%= @order.total_payment - @order.postage %>
+          </td>
         </tr>
         <tr>
-          <th>送料</th>
-          <td><%= @order.postage %></td>
+          <th class="table-secondary border border-dark">
+            送料
+          </th>
+          <td class="table-light border border-dark">
+            <%= @order.postage %>
+          </td>
         </tr>
         <tr>
-          <th>請求金額合計</th>
-          <td><%= @order.total_payment %></td>
+          <th class="table-secondary border border-dark">
+            請求金額合計
+          </th>
+          <td class="table-light border border-dark">
+            <%= @order.total_payment %>
+          </td>
         </tr>
       </table>
     </div>

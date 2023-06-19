@@ -1,34 +1,52 @@
 <div class="container">
+
   <div class="row">
     <h4 class="p-4">ジャンル一覧・追加</h4>
   </div>
-  
-  <div class="row">
-    <div class="pr-3">ジャンル名</div>
-    <%= form_with model: @genre, url: admin_genres_path do |f| %>
-      <div class="mr-3">
-        <%= f.text_field :name, placeholder: "ジャンル名" %>
-      </div>
-      <div class="px-2">
-        <%= f.submit "新規登録", class: 'btn btn-success' %>
-      </div>
-    <% end %>
-  </div>
-  
-  <div class="row pt-5">
-    <ul class="list-unstyled px-2">
 
-    <li class="border-bottom border-top p-2">ジャンル</li>
-  
+  <div class="row">
+    <div class="col-2">
+      ジャンル名
+    </div>
+    <div class="col-10">
+      <%= form_with model: @genre, url: admin_genres_path do |f| %>
       
-      <% @genres.each do |genre| %>
-      <li class="p-2 border-bottom">
-        <%= genre.name %>
-        <%= link_to "編集する", edit_admin_genre_path(genre.id), class: 'btn btn-success' %>
-      </li>
+        <%= f.text_field :name, placeholder: "ジャンル名", class: 'mr-5' %>
+        <%= f.submit "新規登録", class: 'btn btn-success px-5' %>
+        
       <% end %>
-      
-    </ul>
+    </div>
   </div>
-  
+
+  <div class="row pt-5">
+    <div class="col-4">
+
+      <table class="table bg-white">
+        <thead>
+          <tr>
+            <th class="table-secondary border-top border-bottom text-center">
+              ジャンル
+            </th>
+            <th class="table-secondary border-top border-bottom"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @genres.each do |genre| %>
+          <tr>
+            <td class="border-bottom border-secondary align-middle">
+              <%= genre.name %>
+            </td>
+            <td class="border-bottom border-secondary">
+              <%= link_to "編集する", edit_admin_genre_path(genre.id), class: 'btn btn-success' %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="col-8"></div>
+  </div>
+
 </div>
