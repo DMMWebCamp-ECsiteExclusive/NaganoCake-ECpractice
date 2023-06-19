@@ -67,10 +67,10 @@
   <div class="row mb-3 ml-3">
     <div class="col-2">ステータス</div>
     <div class="col-7">
-      <%= f.radio_button :is_deleted, "false" %>
+      <%= f.radio_button :is_deleted, "false", disabled: true %>
       <%= f.label :is_deleted_false, "有効" %>
 
-      <%= f.radio_button :is_deleted, "true" %>
+      <%= f.radio_button :is_deleted, "true", disabled: true %>
       <%= f.label :is_deleted_false, "退会" %>
     </div>
     <div class="col-3"></div>
