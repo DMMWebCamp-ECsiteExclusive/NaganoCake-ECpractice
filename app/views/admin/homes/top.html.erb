@@ -27,7 +27,7 @@
               <%= order.customer.last_name + order.customer.first_name %>
             </td>
             <td class="table-light border border-dark align-middle text-center">
-              <!--%= order.order_details.@amounts %>-->
+              <%= order.order_details.sum(:amount) %>
             </td>
             <td class="table-light border border-dark">
               <%= order.status_i18n %>
@@ -38,9 +38,14 @@
         </tbody>
 
       </table>
-
-      <%= paginate @orders %>
     </div>
     <div class="col-1"></div>
+  </div>
+  
+  <div class="row">
+    <div class="col-2 offset-5">
+      <div><%= paginate @orders %></div>
+    </div>
+    <div class="col-5"></div>
   </div>
 </div>
