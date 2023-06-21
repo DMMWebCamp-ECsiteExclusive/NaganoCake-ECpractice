@@ -1,0 +1,51 @@
+<div class="container">
+
+  <div class="row">
+<!--left-->
+    <div class="col-2 pt-5">
+      <%= render 'public/left_contents', genres: @genres %>
+    </div>
+
+<!--right-->
+    <div class="col-10">
+      <div class="mt-5 pt-5">
+        <div class="d-flex align-items-center justify-content-center">
+          <h5>
+            ようこそ、ながのCAKEへ！<br>
+            このサイトは、ケーキ販売のECサイトになります。<br>
+            会員でない方も商品の閲覧はできますが、<br>
+            購入には会員登録が必要になります。
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!--right-new-items-->
+  <div class="row">
+    <div class="col-2 offset-2">
+      <h2 class="my-3">新着商品</h2>
+    </div>
+    <div class="col-10"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-1 bg-light"></div>
+      <% @items.each do |item| %>
+        <div class="col-2 py-4 bg-light">
+          <%= link_to item_path(item) do%>
+            <div class="mr-2"><%= image_tag item.get_item_image(200,200) %></div>
+          <% end %>
+          <div><%= item.name %></div>
+          <div>￥<%= item.with_tax_price %></div>
+        </div>
+      <% end %>
+    <div class="col-1 bg-light"></div>
+    <div class="col-1"></div>
+  </div>
+
+</div>
+
+

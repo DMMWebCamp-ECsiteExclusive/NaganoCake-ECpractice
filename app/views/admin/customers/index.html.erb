@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10 offset-2">
+     <h4 class="my-4">会員一覧</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-8 offset-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="table-secondary border-top border-dark">
+              会員ID
+            </th>
+            <th class="table-secondary border-top border-dark">
+              氏名
+            </th>
+            <th class="table-secondary border-top border-dark">
+              メールアドレス
+            </th>
+            <th class="table-secondary border-top border-dark">
+              ステータス
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @customers.each do |customer| %>
+            <tr>
+              <td class="table-light border-bottom border-dark">
+                <%= customer.id %>
+              </td>
+              <td class="table-light border-bottom border-dark">
+                <%= link_to customer.last_name + customer.first_name, admin_customer_path(customer) %>
+              </td>
+              <td class="table-light border-bottom border-dark">
+                <%= customer.email %>
+              </td>
+              <td class="table-light border-bottom border-dark text-success pl-4">
+                <%= customer.is_deleted ? '退会' : '有効'%>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+
+      </table>
+    </div>
+    <div class="col-2"></div>
+  </div>
+</div>
